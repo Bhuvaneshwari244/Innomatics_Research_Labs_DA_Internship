@@ -1,0 +1,98 @@
+{
+  "datasets": [
+    {
+      "name": "535d6456",
+      "displayName": "Data Quality & Reconciliation (Gold)",
+      "queryLines": [
+        "SELECT\n",
+        "  'Bronze rows ingested' AS check_metric,\n",
+        "  bronze_rows AS row_count\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Duplicate booking IDs',\n",
+        "  duplicate_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Invalid stay dates (check-out not after check-in)',\n",
+        "  invalid_date_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Missing city',\n",
+        "  missing_city_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Missing total amount',\n",
+        "  missing_total_amount_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Missing nights',\n",
+        "  missing_nights_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Missing booking channel',\n",
+        "  missing_channel_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Clean rows (silver)',\n",
+        "  clean_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality\n",
+        "UNION ALL\n",
+        "SELECT\n",
+        "  'Rejected rows (silver)',\n",
+        "  rejected_rows\n",
+        "FROM\n",
+        "  workspace.default.gold_data_quality"
+      ]
+    },
+    {
+      "name": "c20b2132",
+      "displayName": "hotel_bookings_raw",
+      "config": {
+        "version": "1.1",
+        "source": "hospitality_catalog.default.hotel_bookings_raw",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "46a3219e",
+      "displayName": "Bookings Overview",
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
